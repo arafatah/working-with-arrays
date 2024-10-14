@@ -65,12 +65,81 @@ const inputClosePin = document.querySelector('.form__input--pin');
 /////////////////////////////////////////////////
 // LECTURES
 
+
+
+/////////////////////////////////////////////////
+/*
+// Splice method muted the orginal arraysplice and slice are worked same way, the fundamental deffernce is splice muted the original array but slice don't. 
+consol.log(arr.splice(2)); 
+['c', 'd', 'e']
+// Reversed method muted the orginal arrayIt's reversed the array
+arr = ['a', 'b', 'c', 'd']
+consol.log(arr.reverse());
+['d', 'c', 'b', 'a']
+// slice didn't muted original array
+
+// concat metho doen'st muted the orginal arrayIt's worked like sparead operators. Ex: 
+const letters = arr.concat(arr2)
+consol.log(letters)
+//spread operator
+consol.log([...arr, ...arr2]);
+
+// Join method use for, join all the array's element by using anything, like symbol ( - )EX: 
+consol.log(letters.join('  -  '));a - b - c - d - e - f - g
+
+
+//exploring at method 
+const arr = [23, 54, 31, 67];
+console.log(arr[0]);
+console.log(arr.at(0));
+
+// Getting last array of element
+console.log(arr.length - 1);
+console.log(arr.slice(-1));
+console.log(arr.slice(-1)[0])
+console.log(arr.at(-1)) // can be use (-2), (-3) as well. 
+*/
+
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+for (const movement of movements) {
+  if (movement > 0) {
+    console.log(`You were deposit ${movement}`);
+  } else if (movement < 0) {
+    console.log(`You were withdraw ${Math.abs(movement)}`);
+  }
+}
+
+console.log('---for loop with entries example----')
+for (const [i, movement] of movements.entries()) {
+  if (movement > 0) {
+    console.log(`Movement ${i + 1}: You were deposit ${movement}`);
+  } else {
+    console.log(`Movement ${i + 1}: You were Withdraw ${Math.abs(movement)}`);
+  }
+}
+
+console.log('---------forEach---------');
+movements.forEach(function (movement) {
+  if (movement > 0) {
+    console.log(`You were deposit ${movement}`);
+  } else if (movement < 0) {
+    console.log(`You were withdraw ${Math.abs(movement)}`);
+  }
+});
+
+console.log('-----forEach another version------');
+movements.forEach(function (movement, i, arr) {
+  if (movement > 0) {
+    console.log(`Movement ${i + 1}: You were deposit ${movement}`);
+  } else {
+    console.log(`Movement ${i + 1}: You were Withdraw ${Math.abs(movement)}`);
+  }
+});
+
+
 const currencies = new Map([
   ['USD', 'United States dollar'],
   ['EUR', 'Euro'],
   ['GBP', 'Pound sterling'],
 ]);
-
-const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
-
-/////////////////////////////////////////////////
