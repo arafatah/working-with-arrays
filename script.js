@@ -61,24 +61,41 @@ const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
+const displayMovements = function (movements) {
+  containerMovements.innerHTML = ''; //Make the old html in index.html exact container empty.
+
+  movements.forEach(function (mov, i) {
+    const type = mov > 0 ? 'deposit' : 'withdrawal';
+    const html = `
+    <div class="movements__row">
+      <div class="movements__type movements__type--${type}">${
+      i + 1
+    } ${type}</div>
+     <div class="movements__value">${mov}</div>
+    </div>`;
+
+    containerMovements.insertAdjacentHTML('afterbegin', html);
+  });
+};
+
+displayMovements(account1.movements);
+
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
 
-
-
 /////////////////////////////////////////////////
 /*
-// Splice method muted the orginal arraysplice and slice are worked same way, the fundamental deffernce is splice muted the original array but slice don't. 
+// Splice method muted the original array splice and slice are worked same way, the fundamental difference is splice muted the original array but slice don't. 
 consol.log(arr.splice(2)); 
 ['c', 'd', 'e']
-// Reversed method muted the orginal arrayIt's reversed the array
+// Reversed method muted the original arrayIt's reversed the array
 arr = ['a', 'b', 'c', 'd']
 consol.log(arr.reverse());
 ['d', 'c', 'b', 'a']
 // slice didn't muted original array
 
-// concat metho doen'st muted the orginal arrayIt's worked like sparead operators. Ex: 
+// concat method doesn't muted the original arrayIt's worked like spared operators. Ex: 
 const letters = arr.concat(arr2)
 consol.log(letters)
 //spread operator
@@ -101,7 +118,7 @@ console.log(arr.at(-1)) // can be use (-2), (-3) as well.
 */
 
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
-
+/*
 for (const movement of movements) {
   if (movement > 0) {
     console.log(`You were deposit ${movement}`);
@@ -136,10 +153,67 @@ movements.forEach(function (movement, i, arr) {
     console.log(`Movement ${i + 1}: You were Withdraw ${Math.abs(movement)}`);
   }
 });
-
-
+*/
+/*
 const currencies = new Map([
   ['USD', 'United States dollar'],
   ['EUR', 'Euro'],
   ['GBP', 'Pound sterling'],
 ]);
+
+currencies.forEach(function (value, key, map) {
+  console.log(`${key}: ${value}`);
+});
+
+// SETs -Doesn't have key or index either. This underscore means the throwaway variable. Means a variable that's completely unnecessary.
+const currenciesUnique = new Set(['USD', 'GBP', 'USD', 'EUR', 'EUR']);
+console.log(currenciesUnique);
+currenciesUnique.forEach(function (value, _, map) {
+  console.log(`${value}: ${value}`);
+});
+*/
+/*
+Working With Arrays
+Coding Challenge #1
+Julia and Kate are doing a study on dogs. So each of them asked 5 dog owners 
+about their dog's age, and stored the data into an array (one array for each). For 
+now, they are just interested in knowing whether a dog is an adult or a puppy.
+A dog is an adult if it is at least 3 years old, and it's a puppy if it's less than 3 years 
+old.
+Your tasks:
+Create a function 'checkDogs', which accepts 2 arrays of dog's ages 
+('dogsJulia' and 'dogsKate'), and does the following things:
+1. Julia found out that the owners of the first and the last two dogs actually have 
+cats, not dogs! So create a shallow copy of Julia's array, and remove the cat 
+ages from that copied array (because it's a bad practice to mutate function 
+parameters)
+2. Create an array with both Julia's (corrected) and Kate's data
+3. For each remaining dog, log to the console whether it's an adult ("Dog number 1 
+is an adult, and is 5 years old") or a puppy ("Dog number 2 is still a puppy 
+�
+")
+4. Run the function for both test datasets
+Test data:
+§ Data 1: Julia's data [3, 5, 2, 12, 7], Kate's data [4, 1, 15, 8, 3]
+§ Data 2: Julia's data [9, 16, 6, 8, 3], Kate's data [10, 5, 6, 1, 4]
+Hints: Use tools from all lectures in this section so far �
+GOOD LUCK �*/
+
+const checkDogs = function (JuliaData, KateData) {
+  const dogsJuliaCorrected = JuliaData.slice();
+  dogsJuliaCorrected.splice(0, 1);
+  dogsJuliaCorrected.splice(-2);
+  console.log(dogsJuliaCorrected);
+
+  const totalDogs = [...dogsJuliaCorrected, ...KateData];
+  console.log(totalDogs);
+
+  totalDogs.forEach(function (dog, i) {
+    // const adultCheck = dog >= 3 ? 'adult' : 'puppy'
+    // console.log(`Dog number ${i + 1} is an ${adultCheck}, and it's ${dog} years old.`)
+    if (dog >= 3) {
+      console.log(`Dog number ${i + 1} is an adult, and is ${dog} years old`);
+    } else console.log(`Dog number ${i + 1} is still a puppy.`);
+  });
+};
+checkDogs([3, 5, 2, 12, 7], [4, 1, 15, 8, 3]);
