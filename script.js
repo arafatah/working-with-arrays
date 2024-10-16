@@ -1,7 +1,6 @@
 'use strict';
 
 /////////////////////////////////////////////////
-/////////////////////////////////////////////////
 // BANKIST APP
 
 // Data
@@ -62,7 +61,7 @@ const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
 const displayMovements = function (movements) {
-  containerMovements.innerHTML = ''; //Make the old html in index.html exact container empty.
+  containerMovements.innerHTML = ''; //To make the old html in index.html exact container empty.
 
   movements.forEach(function (mov, i) {
     const type = mov > 0 ? 'deposit' : 'withdrawal';
@@ -71,7 +70,7 @@ const displayMovements = function (movements) {
       <div class="movements__type movements__type--${type}">${
       i + 1
     } ${type}</div>
-     <div class="movements__value">${mov}</div>
+     <div class="movements__value">${mov}€</div>
     </div>`;
 
     containerMovements.insertAdjacentHTML('afterbegin', html);
@@ -80,6 +79,90 @@ const displayMovements = function (movements) {
 
 displayMovements(account1.movements);
 
+const calcDisplayBalance = function (movements) {
+  const balance = movements.reduce((acc, mov) => acc + mov, 0);
+  labelBalance.textContent = `${balance}€`;
+};
+
+calcDisplayBalance(account1.movements);
+
+const calcDisplaySummary = function (movements) {
+  const incomes = movements
+    .filter(mov => mov > 0)
+    .reduce((acc, mov) => acc + mov, 0);
+  labelSumIn.textContent = `${incomes}€`;
+
+  const out = movements
+    .filter(mov => mov < 0)
+    .reduce((acc, mov) => acc + mov, 0);
+  labelSumOut.textContent = `${Math.abs(out)}€`;
+
+  const interest = movements
+    .filter(mov => mov > 0)
+    .map(deposit => (deposit * 1.2) / 100)
+    .filter(int => {
+      return int >= 1;
+    })
+    .reduce((acc, int) => acc + int, 0);
+  labelSumInterest.textContent = interest;
+};
+
+calcDisplaySummary(account1.movements);
+
+const user = 'Steven Thomas Williams';
+
+const createUsername = function (accs) {
+  accs.forEach(function (acc) {
+    acc.username = acc.owner
+      .toLowerCase()
+      .split(' ')
+      .map(name => name[0])
+      .join('');
+  });
+
+  // const username = user.toLowerCase()
+  //   .split(' ')
+  //   .map(name => name[0])
+  //   .join('');
+  //   return username
+};
+
+createUsername(accounts);
+
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+const euroToUsd = 1.1;
+
+//Pipeline
+const totalDeposit = movements
+  .filter(mov => mov > 0)
+  .map(mov => mov * euroToUsd)
+  .reduce((acc, mov, i) => acc + mov, 0);
+console.log(totalDeposit);
+/*
+//reduce method
+//Accumulator is like -> snowball - It can define initial value of the first accumulator
+const balance = movements.reduce(function (acc, cur) {
+  return acc + cur;
+}, 0);
+console.log(balance);
+
+const balance2 = movements.reduce((acc, cur) => acc + cur, 0);
+console.log(balance2);
+
+// Maximum value
+// const max = movements.reduce(
+//   (acc, mov) => `${acc > mov ? acc : mov}`,
+//   movements[0]
+// );
+// console.log(typeof max)
+
+const max = movements.reduce((acc, mov) => {
+  if (acc > mov) return acc;
+  else return mov;
+}, movements[0]);
+console.log(max);
+*/
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
@@ -104,7 +187,8 @@ consol.log([...arr, ...arr2]);
 // Join method use for, join all the array's element by using anything, like symbol ( - )EX: 
 consol.log(letters.join('  -  '));a - b - c - d - e - f - g
 
-
+*/
+/*
 //exploring at method 
 const arr = [23, 54, 31, 67];
 console.log(arr[0]);
@@ -115,10 +199,9 @@ console.log(arr.length - 1);
 console.log(arr.slice(-1));
 console.log(arr.slice(-1)[0])
 console.log(arr.at(-1)) // can be use (-2), (-3) as well. 
-*/
 
-const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
-/*
+
+
 for (const movement of movements) {
   if (movement > 0) {
     console.log(`You were deposit ${movement}`);
@@ -153,8 +236,8 @@ movements.forEach(function (movement, i, arr) {
     console.log(`Movement ${i + 1}: You were Withdraw ${Math.abs(movement)}`);
   }
 });
-*/
-/*
+
+
 const currencies = new Map([
   ['USD', 'United States dollar'],
   ['EUR', 'Euro'],
@@ -171,7 +254,7 @@ console.log(currenciesUnique);
 currenciesUnique.forEach(function (value, _, map) {
   console.log(`${value}: ${value}`);
 });
-*/
+
 /*
 Working With Arrays
 Coding Challenge #1
@@ -197,7 +280,7 @@ Test data:
 § Data 1: Julia's data [3, 5, 2, 12, 7], Kate's data [4, 1, 15, 8, 3]
 § Data 2: Julia's data [9, 16, 6, 8, 3], Kate's data [10, 5, 6, 1, 4]
 Hints: Use tools from all lectures in this section so far �
-GOOD LUCK �*/
+GOOD LUCK �
 
 const checkDogs = function (JuliaData, KateData) {
   const dogsJuliaCorrected = JuliaData.slice();
@@ -217,3 +300,127 @@ const checkDogs = function (JuliaData, KateData) {
   });
 };
 checkDogs([3, 5, 2, 12, 7], [4, 1, 15, 8, 3]);
+
+const euroToUsd = 1.1;
+
+// const movementsUSD = movements.map(function (mov) {
+//   return mov * euroToUsd;
+// });
+// console.log(movementsUSD);
+
+// Using arrow function
+const movementUSD = movements.map(mov => mov * euroToUsd);
+
+console.log(movements);
+console.log(movementUSD);
+
+// Using for method
+const movementsUSDfor = [];
+for (const mov of movements) movementsUSDfor.push(mov * euroToUsd);
+console.log(movementsUSDfor);
+
+/////////////////With normal function
+const movementsDescription = movements.map(function (mov, i) {
+  if (mov > 0) {
+    return `Movement ${i + 1}: You deposit ${Math.abs(mov)}`;
+  } else {
+    return `Movement ${i + 1}: You withdraw ${Math.abs(mov)}`;
+  }
+});
+console.log(movementsDescription);
+
+//////////////with arrow function
+const movementsDescription2 = movements.map(
+  (mov, i) =>
+    `Movement ${i + 1}: You ${mov > 0 ? 'deposit' : 'withdraw'} ${Math.abs(
+      mov
+    )}`
+);
+console.log(movementsDescription2);
+
+
+// Filter method
+const deposit = movements.filter(function (mov) {
+  return mov > 0;
+});
+
+console.log(movements);
+console.log(deposit);
+
+const withdrawal = movements.filter( (mov) =>
+   mov < 0
+);
+
+console.log(withdrawal);
+*/
+
+/*
+Coding Challenge #2
+Let's go back to Julia and Kate's study about dogs. This time, they want to convert dog ages to human ages and calculate the average age of the dogs in their study.
+Your tasks:
+Create a function 'calcAverageHumanAge', which accepts an arrays of dog's 
+ages ('ages'), and does the following things in order:
+1. Calculate the dog age in human years using the following formula: if the dog is 
+<= 2 years old, humanAge = 2 * dogAge. If the dog is > 2 years old, 
+humanAge = 16 + dogAge * 4
+2. Exclude all dogs that are less than 18 human years old (which is the same as keeping dogs that are at least 18 years old)
+3. Calculate the average human age of all adult dogs (you should already know from other challenges how we calculate averages �)
+4. Run the function for both test datasets
+Test data:
+§ Data 1: [5, 2, 4, 1, 15, 8, 3]
+§ Data 2: [16, 6, 10, 5, 6, 1, 4]
+GOOD LUCK 
+*/
+const calcAverageHumanAge2 = ages =>
+  ages
+    .map(age => (age <= 2 ? 2 * age : 16 + age * 4))
+    .filter(age => age >= 18)
+    .reduce((acc, age, i, arr) => acc + age / arr.length, 0);
+
+const avr2 = calcAverageHumanAge2([5, 2,4, 4, 1, 15, 8, 3]);
+const avr = calcAverageHumanAge2([16, 6,55, 10, 5, 6, 1, 4]);
+console.log(avr, avr2);
+/*
+// Solved the challenge 2 problem
+const calcAverageHumanAge = ages => {
+  const humanAge = ages.map(age => {
+    if (age <= 2) {
+      return 2 * age;
+    } else age > 2;
+    return 16 + age * 4;
+  });
+  const adult = humanAge.filter(age => age >= 18);
+  console.log(adult);
+  console.log(humanAge); 
+  const humanAverageAge =
+    adult.reduce((acc, cur) => acc + cur, 0) / adult.length;
+    return humanAverageAge; 
+  console.log(humanAverageAge);
+  
+};
+
+const avg1 = calcAverageHumanAge([5, 2, 4, 1, 15, 8, 3]);
+const avg2 = calcAverageHumanAge([16, 6, 10, 5, 6, 1, 4]);
+
+console.log(avg1, avg2)*/
+
+// With the arrow function and less code.
+const calcAverageHumanAge = ages =>
+  ages
+    .map(age => (age <= 2 ? 2 * age : 16 + age * 4))
+    .filter(age => age >= 18)
+    .reduce((acc, age, i, arr) => acc + age / arr.length, 0);
+
+const avg1 = calcAverageHumanAge([5, 2, 4, 1, 15, 8, 3]);
+const avg2 = calcAverageHumanAge([16, 6, 10, 5, 6, 1, 4]);
+
+console.log(avg1, avg2);
+
+//calculate the total deposit ---- Practice
+const eurToUSD = 1.1;
+const totalDeposit2 = movements
+  .filter(mov => mov > 0)
+  .map(mov => mov * eurToUSD)
+  .reduce((acc, mov) => acc + mov, 0);
+
+console.log(totalDeposit);
