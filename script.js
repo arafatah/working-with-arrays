@@ -80,10 +80,12 @@ const createUsername = function (accs) {
 7, 675;
 createUsername(accounts);
 
-const displayMovements = function (movements) {
+const displayMovements = function (movements, sort = false) {
   containerMovements.innerHTML = ''; //To make the old html in index.html exact container empty.
 
-  movements.forEach(function (mov, i) {
+  const movs = sort ? movements.slice().sort((a, b) => a - b) : movements;
+
+  movs.forEach(function (mov, i) {
     const type = mov > 0 ? 'deposit' : 'withdrawal';
     const html = `
     <div class="movements__row">
@@ -179,6 +181,13 @@ btnTransfer.addEventListener('click', function (e) {
     receiverAcc.movements.push(amount);
     displayUI(currentAccount);
   }
+});
+
+let sorted = false;
+btnSort.addEventListener('click', function (e) {
+  e.preventDefault();
+  displayMovements(currentAccount.movements, !sorted);
+  sorted = !sorted;
 });
 
 //SOME method
@@ -549,4 +558,4 @@ console.log(movements);
 //   if (a < b) return 1;
 // });
 movements.sort((a, b) => b - a);
-console.log(movements)
+console.log(movements);
