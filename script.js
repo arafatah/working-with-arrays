@@ -32,6 +32,7 @@ const account4 = {
 };
 
 const accounts = [account1, account2, account3, account4];
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 // Elements
 const labelWelcome = document.querySelector('.welcome');
@@ -76,7 +77,7 @@ const createUsername = function (accs) {
   //   .join('');
   //   return username
 };
-
+7, 675;
 createUsername(accounts);
 
 const displayMovements = function (movements) {
@@ -180,6 +181,22 @@ btnTransfer.addEventListener('click', function (e) {
   }
 });
 
+//SOME method
+btnLoan.addEventListener('click', function (e) {
+  e.preventDefault();
+  const amount = Number(inputLoanAmount.value);
+  if (amount > 0 && currentAccount.movements.some(mov => mov >= amount / 10)) {
+    // Add movement
+    currentAccount.movements.push(amount);
+    displayUI(currentAccount);
+  }
+  inputLoanAmount.value = '';
+});
+
+// EVERY method
+console.log(movements.every(mov => mov > 0));
+console.log(account4.movements.every(mov => mov > 0));
+
 btnClose.addEventListener('click', function (e) {
   e.preventDefault();
   if (
@@ -197,8 +214,6 @@ btnClose.addEventListener('click', function (e) {
   }
   inputCloseUsername.value = inputClosePin.value = '';
 });
-
-const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 const euroToUsd = 1.1;
 
@@ -493,3 +508,45 @@ const totalDeposit2 = movements
   .reduce((acc, mov) => acc + mov, 0);
 
 console.log(totalDeposit);
+
+//flat method - It's used for to flat the array. Es6 feature
+const arr = [[1, 2, 3], [4, 5, 6], 7, 8];
+console.log(arr.flat()); //[1, 2, 3, 4, 5, 6, 7, 8]
+
+const arrDeep = [[[1, 2], 3], [4, [5, 6]], 7, 8];
+console.log(arrDeep.flat(2)); // in the [parameter it can declare that how much level deep you wanna go. like 1 level 2 level 3 level - And it will show output like this .
+
+const accountMovementsBalance = accounts
+  .map(acc => acc.movements)
+  .flat()
+  .reduce((acc, mov) => acc + mov, 0);
+console.log(accountMovementsBalance);
+
+//flatMap
+const accountMovementsBalance2 = accounts
+  .flatMap(acc => acc.movements) // it's only goes 1 level deep, if need go more deep, use flat method.
+  .reduce((acc, mov) => acc + mov, 0);
+console.log(accountMovementsBalance2);
+
+//This sorting is always based on string - built-in
+//Sorting with the built-in function of JS muted the original array.
+const owners = ['Jonas', 'Hridoy,', 'Foysal', 'Martha', 'Arafat'];
+console.log(owners.sort());
+
+// return < 0, A, B
+// return > 0, B, A
+//Ascending
+// movements.sort((a, b) => {
+//   if (a > b) return 1;
+//   if (a < b) return -1;
+// });
+movements.sort((a, b) => a - b);
+console.log(movements);
+
+//Descending
+// movements.sort((a, b) => {
+//   if (a > b) return -1;
+//   if (a < b) return 1;
+// });
+movements.sort((a, b) => b - a);
+console.log(movements)
