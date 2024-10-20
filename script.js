@@ -222,6 +222,9 @@ btnClose.addEventListener('click', function (e) {
     containerApp.style.opacity = 0;
   }
   inputCloseUsername.value = inputClosePin.value = '';
+  inputClosePin.blur();
+
+  console.log(accounts);
 });
 
 const euroToUsd = 1.1;
@@ -634,24 +637,23 @@ console.log(
 
 const ownersEatTooMuch = dogs
   .filter(dog => dog.curFood > dog.recFood)
-
   .flatMap(dog => dog.owners);
 console.log(ownersEatTooMuch);
 
 const ownersEatTooLittle = dogs
   .filter(dog => dog.curFood < dog.recFood)
-
   .flatMap(dog => dog.owners);
 console.log(ownersEatTooLittle);
 
 console.log(`${ownersEatTooMuch.join(' and ')}'s dogs eat too much`);
 console.log(`${ownersEatTooLittle.join(' and ')}'s dogs eat too little`);
 
+console.log(dogs.some(dog => dog.curFood === dog.recFood));
+
 const checkEatingOkay = dog =>
   dog.curFood > dog.recFood ** 0.9 && dog.curFood < dog.recFood * 1.1;
 
 console.log(dogs.some(checkEatingOkay));
-
 console.log(dogs.filter(checkEatingOkay));
 
 const dogsSorted = dogs.slice().sort((a, b) => a.recFood - b.recFood);
