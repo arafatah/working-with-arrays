@@ -202,9 +202,9 @@ btnLoan.addEventListener('click', function (e) {
   inputLoanAmount.value = '';
 });
 
-// EVERY method
-console.log(movements.every(mov => mov > 0));
-console.log(account4.movements.every(mov => mov > 0));
+// // EVERY method
+// console.log(movements.every(mov => mov > 0));
+// console.log(account4.movements.every(mov => mov > 0));
 
 btnClose.addEventListener('click', function (e) {
   e.preventDefault();
@@ -231,7 +231,7 @@ const totalDeposit = movements
   .filter(mov => mov > 0)
   .map(mov => mov * euroToUsd)
   .reduce((acc, mov, i) => acc + mov, 0);
-console.log(totalDeposit);
+// console.log(totalDeposit);
 /*
 //reduce method
 //Accumulator is like -> snowball - It can define initial value of the first accumulator
@@ -472,7 +472,7 @@ const calcAverageHumanAge2 = ages =>
 
 const avr2 = calcAverageHumanAge2([5, 2, 4, 4, 1, 15, 8, 3]);
 const avr = calcAverageHumanAge2([16, 6, 55, 10, 5, 6, 1, 4]);
-console.log(avr, avr2);
+// console.log(avr, avr2);
 /*
 // Solved the challenge 2 problem
 const calcAverageHumanAge = ages => {
@@ -507,7 +507,7 @@ const calcAverageHumanAge = ages =>
 const avg1 = calcAverageHumanAge([5, 2, 4, 1, 15, 8, 3]);
 const avg2 = calcAverageHumanAge([16, 6, 10, 5, 6, 1, 4]);
 
-console.log(avg1, avg2);
+// console.log(avg1, avg2);
 
 //calculate the total deposit ---- Practice
 const eurToUSD = 1.1;
@@ -516,31 +516,31 @@ const totalDeposit2 = movements
   .map(mov => mov * eurToUSD)
   .reduce((acc, mov) => acc + mov, 0);
 
-console.log(totalDeposit);
+// console.log(totalDeposit);
 
 //flat method - It's used for to flat the array. Es6 feature
 const arr = [[1, 2, 3], [4, 5, 6], 7, 8];
-console.log(arr.flat()); //[1, 2, 3, 4, 5, 6, 7, 8]
+// console.log(arr.flat()); //[1, 2, 3, 4, 5, 6, 7, 8]
 
 const arrDeep = [[[1, 2], 3], [4, [5, 6]], 7, 8];
-console.log(arrDeep.flat(2)); // in the [parameter it can declare that how much level deep you wanna go. like 1 level 2 level 3 level - And it will show output like this .
+// console.log(arrDeep.flat(2)); // in the [parameter it can declare that how much level deep you wanna go. like 1 level 2 level 3 level - And it will show output like this .
 
 const accountMovementsBalance = accounts
   .map(acc => acc.movements)
   .flat()
   .reduce((acc, mov) => acc + mov, 0);
-console.log(accountMovementsBalance);
+// console.log(accountMovementsBalance);
 
 //flatMap
 const accountMovementsBalance2 = accounts
   .flatMap(acc => acc.movements) // it's only goes 1 level deep, if need go more deep, use flat method.
   .reduce((acc, mov) => acc + mov, 0);
-console.log(accountMovementsBalance2);
+// console.log(accountMovementsBalance2);
 
 //This sorting is always based on string - built-in
 //Sorting with the built-in function of JS muted the original array.
 const owners = ['Jonas', 'Hridoy,', 'Foysal', 'Martha', 'Arafat'];
-console.log(owners.sort());
+// console.log(owners.sort());
 
 // return < 0, A, B
 // return > 0, B, A
@@ -550,7 +550,7 @@ console.log(owners.sort());
 //   if (a < b) return -1;
 // });
 movements.sort((a, b) => a - b);
-console.log(movements);
+// console.log(movements);
 
 //Descending
 // movements.sort((a, b) => {
@@ -559,6 +559,100 @@ console.log(movements);
 // });
 movements.sort((a, b) => b - a);
 new Array(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+/*
+Coding Challenge #4
+Julia and Kate are still studying dogs, and this time they are studying if dogs are 
+eating too much or too little.
+Eating too much means the dog's current food portion is larger than the 
+recommended portion, and eating too little is the opposite.
+Eating an okay amount means the dog's current food portion is within a range 10% 
+above and 10% below the recommended portion (see hint).
+Your tasks:
+1. Loop over the 'dogs' array containing dog objects, and for each dog, calculate 
+the recommended food portion and add it to the object as a new property. Do 
+not create a new array, simply loop over the array. Formula: 
+recommendedFood = weight ** 0.75 * 28. (The result is in grams of 
+food, and the weight needs to be in kg)
+2. Find Sarah's dog and log to the console whether it's eating too much or too 
+little. Hint: Some dogs have multiple owners, so you first need to find Sarah in 
+the owners array, and so this one is a bit tricky (on purpose) �
 
-//This is a test data 
-console.log('Hello World ')
+3. Create an array containing all owners of dogs who eat too much 
+('ownersEatTooMuch') and an array with all owners of dogs who eat too little 
+('ownersEatTooLittle').
+
+4. Log a string to the console for each array created in 3., like this: "Matilda and 
+Alice and Bob's dogs eat too much!" and "Sarah and John and Michael's dogs eat 
+too little!"
+
+5. Log to the console whether there is any dog eating exactly the amount of food 
+that is recommended (just true or false)
+6. Log to the console whether there is any dog eating an okay amount of food 
+(just true or false)
+
+7. Create an array containing the dogs that are eating an okay amount of food (try 
+to reuse the condition used in 6.)
+
+8. Create a shallow copy of the 'dogs' array and sort it by recommended food 
+portion in an ascending order (keep in mind that the portions are inside the 
+array's objects �)
+
+The Complete JavaScript Course 26
+Hints:
+§ Use many different tools to solve these challenges, you can use the summary 
+lecture to choose between them �
+§ Being within a range 10% above and below the recommended portion means: 
+current > (recommended * 0.90) && current < (recommended * 
+1.10). Basically, the current portion should be between 90% and 110% of the 
+recommended portion.
+Test data:
+ const dogs = [
+ { weight: 22, curFood: 250, owners: ['Alice', 'Bob'] },
+ { weight: 8, curFood: 200, owners: ['Matilda'] },
+ { weight: 13, curFood: 275, owners: ['Sarah', 'John'] },
+ { weight: 32, curFood: 340, owners: ['Michael'] },
+ ];
+GOOD LUCK */
+
+const dogs = [
+  { weight: 22, curFood: 250, owners: ['Alice', 'Bob'] },
+  { weight: 8, curFood: 200, owners: ['Matilda'] },
+  { weight: 13, curFood: 275, owners: ['Sarah', 'John'] },
+  { weight: 32, curFood: 340, owners: ['Michael'] },
+];
+
+dogs.forEach(dog => (dog.recFood = dog.weight ** 0.75 * 28));
+console.log(dogs);
+
+const dogSarah = dogs.find(dog => dog.owners.includes('Sarah'));
+console.log(dogSarah);
+console.log(
+  `Sarah dog eating too ${
+    dogSarah.curFood > dogSarah.recFood ? 'Much' : 'Little'
+  }`
+);
+
+const ownersEatTooMuch = dogs
+  .filter(dog => dog.curFood > dog.recFood)
+
+  .flatMap(dog => dog.owners);
+console.log(ownersEatTooMuch);
+
+const ownersEatTooLittle = dogs
+  .filter(dog => dog.curFood < dog.recFood)
+
+  .flatMap(dog => dog.owners);
+console.log(ownersEatTooLittle);
+
+console.log(`${ownersEatTooMuch.join(' and ')}'s dogs eat too much`);
+console.log(`${ownersEatTooLittle.join(' and ')}'s dogs eat too little`);
+
+const checkEatingOkay = dog =>
+  dog.curFood > dog.recFood ** 0.9 && dog.curFood < dog.recFood * 1.1;
+
+console.log(dogs.some(checkEatingOkay));
+
+console.log(dogs.filter(checkEatingOkay));
+
+const dogsSorted = dogs.slice().sort((a, b) => a.recFood - b.recFood);
+console.log(dogsSorted);
