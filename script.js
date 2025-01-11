@@ -658,3 +658,5 @@ console.log(dogs.filter(checkEatingOkay));
 
 const dogsSorted = dogs.slice().sort((a, b) => a.recFood - b.recFood);
 console.log(dogsSorted);
+
+
