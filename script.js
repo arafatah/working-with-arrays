@@ -77,10 +77,10 @@ const createUsername = function (accs) {
   //   .join('');
   //   return username
 };
-7, 675;
 createUsername(accounts);
 
 const displayMovements = function (movements, sort = false) {
+  // Always make innerHTML empty it will fix the problem.
   containerMovements.innerHTML = ''; //To make the old html in index.html exact container empty.
 
   const movs = sort ? movements.slice().sort((a, b) => a - b) : movements;
@@ -89,9 +89,9 @@ const displayMovements = function (movements, sort = false) {
     const type = mov > 0 ? 'deposit' : 'withdrawal';
     const html = `
     <div class="movements__row">
-      <div class="movements__type movements__type--${type}">${
-      i + 1
-    } ${type}</div>
+      <div class="movements__type movements__type--${type}">
+        ${i + 1} ${type}
+      </div>
      <div class="movements__value">${mov}€</div>
     </div>`;
 
@@ -384,6 +384,7 @@ const checkDogs = function (JuliaData, KateData) {
   dogsJuliaCorrected.splice(-2);
   console.log(dogsJuliaCorrected);
 
+  // Can be use with concat method. 
   const totalDogs = [...dogsJuliaCorrected, ...KateData];
   console.log(totalDogs);
 
@@ -396,6 +397,7 @@ const checkDogs = function (JuliaData, KateData) {
   });
 };
 checkDogs([3, 5, 2, 12, 7], [4, 1, 15, 8, 3]);
+checkDogs([9, 16, 6, 8, 3], [[10, 5, 6, 1, 4]]);
 
 const euroToUsd = 1.1;
 
@@ -666,7 +668,7 @@ movements.forEach(function (movement, i, array) {
     console.log(`You withdraw ${i + 1}: ${Math.abs(movement)}`);
   }
 });
- 
+
 const currencies = new Map([
   ['USD', 'United States dollar'],
   ['EUR', 'Euro'],
@@ -676,3 +678,25 @@ const currencies = new Map([
 currencies.forEach(function (value, key, map) {
   console.log(`${key}: ${value}`);
 });
+
+const checkDogs = function (JuliaData, KateData) {
+  const dogsJuliaCorrected = JuliaData.slice();
+  dogsJuliaCorrected.splice(0, 1);
+  dogsJuliaCorrected.splice(-2);
+  // console.log(dogsJuliaCorrected);
+
+  // Can be use with concat method. 
+  const totalDogs = [...dogsJuliaCorrected, ...KateData];
+  // console.log(totalDogs);
+
+  totalDogs.forEach(function (dog, i) {
+    const adultCheck = dog >= 3 ? 'adult' : 'puppy'
+    console.log(`Dog number ${i + 1} is an ${adultCheck}, and it's ${dog} years old.`)
+    // if (dog >= 3) {
+    //   console.log(`Dog number ${i + 1} is an adult, and is ${dog} years old`);
+    // } else console.log(`Dog number ${i + 1} is still a puppy.`);
+  });
+};
+checkDogs([3, 5, 2, 12, 7], [4, 1, 15, 8, 3]);
+console.log('Separators------')
+checkDogs([9, 16, 6, 8, 3], [10, 5, 6, 1, 4]);
