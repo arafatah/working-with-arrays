@@ -659,10 +659,10 @@ console.log(dogs.filter(checkEatingOkay));
 const dogsSorted = dogs.slice().sort((a, b) => a.recFood - b.recFood);
 console.log(dogsSorted);
 
-movements.forEach(function (movement) {
+movements.forEach(function (movement, i, array) {
   if (movement > 0) {
-    console.log(`You deposited ${movement}`);
+    console.log(`You deposited ${i + 1}: ${movement}`);
   } else {
-    console.log(`You withdraw ${Math.abs(movement)}`);
+    console.log(`You withdraw ${i + 1}: ${Math.abs(movement)}`);
   }
 });
