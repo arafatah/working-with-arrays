@@ -235,6 +235,7 @@ const totalDeposit = movements
   .map(mov => mov * euroToUsd)
   .reduce((acc, mov, i) => acc + mov, 0);
 // console.log(totalDeposit);
+
 /*
 //reduce method
 //Accumulator is like -> snowball - It can define initial value of the first accumulator
@@ -259,11 +260,9 @@ const max = movements.reduce((acc, mov) => {
 }, movements[0]);
 console.log(max);
 */
-/////////////////////////////////////////////////
-/////////////////////////////////////////////////
-// LECTURES
 
 /////////////////////////////////////////////////
+// LECTURES
 /*
 // Splice method muted the original array splice and slice are worked same way, the fundamental difference is splice muted the original array but slice don't. 
 consol.log(arr.splice(2)); 
@@ -417,7 +416,7 @@ const movementsUSDfor = [];
 for (const mov of movements) movementsUSDfor.push(mov * euroToUsd);
 console.log(movementsUSDfor);
 
-/////////////////With normal function
+// With normal function
 const movementsDescription = movements.map(function (mov, i) {
   if (mov > 0) {
     return `Movement ${i + 1}: You deposit ${Math.abs(mov)}`;
@@ -427,7 +426,7 @@ const movementsDescription = movements.map(function (mov, i) {
 });
 console.log(movementsDescription);
 
-//////////////with arrow function
+// with arrow function
 const movementsDescription2 = movements.map(
   (mov, i) =>
     `Movement ${i + 1}: You ${mov > 0 ? 'deposit' : 'withdraw'} ${Math.abs(
@@ -685,18 +684,30 @@ const checkDogs = function (JuliaData, KateData) {
   dogsJuliaCorrected.splice(-2);
   // console.log(dogsJuliaCorrected);
 
-  // Can be use with concat method. 
+  // Can be use with concat method.
   const totalDogs = [...dogsJuliaCorrected, ...KateData];
+  // const totalDogs  = dogsJuliaCorrected.concat(KateData)
   // console.log(totalDogs);
 
   totalDogs.forEach(function (dog, i) {
-    const adultCheck = dog >= 3 ? 'adult' : 'puppy'
-    console.log(`Dog number ${i + 1} is an ${adultCheck}, and it's ${dog} years old.`)
+    const adultCheck = dog >= 3 ? 'adult' : 'puppy';
+    console.log(
+      `Dog number ${i + 1} is an ${adultCheck}, and it's ${dog} years old.`
+    );
     // if (dog >= 3) {
     //   console.log(`Dog number ${i + 1} is an adult, and is ${dog} years old`);
     // } else console.log(`Dog number ${i + 1} is still a puppy.`);
   });
 };
+
 checkDogs([3, 5, 2, 12, 7], [4, 1, 15, 8, 3]);
-console.log('Separators------')
+console.log('Separators------');
 checkDogs([9, 16, 6, 8, 3], [10, 5, 6, 1, 4]);
+
+const movementsDescription = movements.map(
+  (mov, i) =>
+    `Movement ${i + 1}: You ${mov > 0 ? 'deposit' : 'withdraw'} ${Math.abs(
+      mov
+    )}`
+);
+console.log(movementsDescription);
