@@ -164,12 +164,12 @@ btnLogin.addEventListener('click', function (e) {
 
 btnTransfer.addEventListener('click', function (e) {
   e.preventDefault();
-  const amount = Number(inputTransferAmount.value);
+  const amount = +inputTransferAmount.value;
   const receiverAcc = accounts.find(
     acc => acc.username === inputTransferTo.value
   );
 
-  //clear the input field
+  // clear the input field
   inputTransferAmount.value = inputTransferTo.value = '';
   if (
     amount > 0 &&
@@ -210,8 +210,8 @@ btnLoan.addEventListener('click', function (e) {
 btnClose.addEventListener('click', function (e) {
   e.preventDefault();
   if (
-    currentAccount.username === inputCloseUsername.value &&
-    inputClosePin === Number(currentAccount.pin)
+    inputCloseUsername.value === currentAccount.username &&
+    Number(inputClosePin.value) === currentAccount.pin
   ) {
     const index = accounts.findIndex(
       acc => acc.username === currentAccount.username
@@ -895,8 +895,8 @@ const calcAverageHumanAged = ages => {
 
   const humanAverageAge =
     adult.reduce((acc, cur) => acc + cur, 0) / adult.length;
-    console.log(humanAverageAge);
-    return humanAverageAge;
+  console.log(humanAverageAge);
+  return humanAverageAge;
 };
 
 const avg12 = calcAverageHumanAged([5, 2, 4, 1, 15, 8, 3]);
