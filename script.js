@@ -730,18 +730,13 @@ const deposit = movements.filter(function (mov) {
 console.log(movements);
 console.log(deposit);
 
-const withdrawal = movements.filter( (mov) =>
-  mov < 0
-);
+const withdrawal = movements.filter(mov => mov < 0);
 
 console.log(withdrawal);
 
+/////////////
 
-
-///////////// 
-
-
-class Calculator {
+/* class Calculator {
   constructor(previousOperandTextElement, currentOperandTextElement) {
     this.previousOperandTextElement = previousOperandTextElement
     this.currentOperandTextElement = currentOperandTextElement
@@ -866,4 +861,22 @@ allClearButton.addEventListener('click', button => {
 deleteButton.addEventListener('click', button => {
   calculator.delete()
   calculator.updateDisplay()
-}) 
+})  */
+
+// Accumulator -> SNOWBALL
+// Reduce method has two parameters/arguments. First: This will be the function Second: It will be the initial value for the loop iteration.
+const balance = movements.reduce(function (acc, cur, i, arr) {
+  return acc + cur;
+}, 0);
+console.log(balance);
+
+let balance2 = 0;
+for (const mov of movements) balance2 += mov;
+console.log(balance2);
+
+// Get maximum balance using reduce
+const max = movements.reduce((acc, mov) => {
+  if (acc > mov) return acc;
+  else return mov;
+}, movements.at(0));
+console.log(max);
