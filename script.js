@@ -874,9 +874,32 @@ let balance2 = 0;
 for (const mov of movements) balance2 += mov;
 console.log(balance2);
 
-// Get maximum balance using reduce
+// Get maximum balance using reduce method
 const max = movements.reduce((acc, mov) => {
   if (acc > mov) return acc;
   else return mov;
 }, movements.at(0));
 console.log(max);
+///////
+const calcAverageHumanAged = ages => {
+  const humanAge = ages.map(age => {
+    if (age <= 2) {
+      return 2 * age;
+    } else age > 2;
+    return 16 + age * 4;
+  });
+  const adult = humanAge.filter(age => age >= 18);
+
+  console.log(adult);
+  console.log(humanAge);
+
+  const humanAverageAge =
+    adult.reduce((acc, cur) => acc + cur, 0) / adult.length;
+    console.log(humanAverageAge);
+    return humanAverageAge;
+};
+
+const avg12 = calcAverageHumanAged([5, 2, 4, 1, 15, 8, 3]);
+const avg22 = calcAverageHumanAged([16, 6, 10, 5, 6, 1, 4]);
+
+console.log(avg12, avg22);
