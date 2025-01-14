@@ -974,3 +974,32 @@ console.log(numDepositThousand);
 let a = 10;
 console.log(a++);
 console.log(a);
+
+// This can be destructure also immediately. 
+const sums = accounts
+  .flatMap(acc => acc.movements)
+  .reduce(
+    (sums, cur) => {
+      cur > 0 ? (sums.deposit += cur) : (sums.withdrawal += cur);
+      return sums;
+    },
+    { deposit: 0, withdrawal: 0 }
+  );
+
+console.log(sums);
+
+
+const convertTitleCase = function(title) {
+  const capitalize = str => str[0].toUpperCase() + str.slice(1);
+  const exceptions = ['a', 'an', 'and', 'the', 'but', 'or', 'on', 'in', 'with'];
+
+  const titleCase = title
+    .toLowerCase()
+    .split(' ')
+    .map(word => (exceptions.includes(word) ? word : capitalize(word)))
+    .join(' ');
+
+  return capitalize(titleCase);
+};
+
+console.log(convertTitleCase('hello my name is arafat'))
