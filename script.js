@@ -563,7 +563,7 @@ movements.sort((a, b) => a - b);
 //   if (a < b) return 1;
 // });
 movements.sort((a, b) => b - a);
-new Array(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+new Array(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 15);
 /*
 Coding Challenge #4
 Julia and Kate are still studying dogs, and this time they are studying if dogs are 
@@ -903,3 +903,16 @@ const avg12 = calcAverageHumanAged([5, 2, 4, 1, 15, 8, 3]);
 const avg22 = calcAverageHumanAged([16, 6, 10, 5, 6, 1, 4]);
 
 console.log(avg12, avg22);
+
+console.log(movements);
+const lastWithdrawal = movements.findLast(mov => mov < 0);
+console.log(lastWithdrawal);
+
+const latestLargeMovementIndex = movements.findLastIndex(
+  mov => Math.abs(mov) > 2000
+);
+console.log(
+  `Your latest large movement was ${
+    movements.length - latestLargeMovementIndex
+  } movements ago.`
+);
