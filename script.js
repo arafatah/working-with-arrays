@@ -84,6 +84,7 @@ const displayMovements = function (movements, sort = false) {
   // Always make innerHTML empty it will fix the problem.
   containerMovements.innerHTML = ''; //To make the old html in index.html exact container empty.
 
+  // Slice here for to copy the array
   const movs = sort ? movements.slice().sort((a, b) => a - b) : movements;
 
   movs.forEach(function (mov, i) {
@@ -203,7 +204,7 @@ btnLoan.addEventListener('click', function (e) {
   inputLoanAmount.value = '';
 });
 
-// // EVERY method
+// //EVERY method
 // console.log(movements.every(mov => mov > 0));
 // console.log(account4.movements.every(mov => mov > 0));
 
@@ -916,3 +917,28 @@ console.log(
     movements.length - latestLargeMovementIndex
   } movements ago.`
 );
+
+const arr2 = [[1, 2, 3], [4, 5, 6], 7, 7, 8];
+console.log(arr2.flat()); // [1, 2, 3, 4, 5, 6, 7, 8]
+
+const arrDeep2 = [[[1, 2], 3], [4, [5, 6]], 7, 8];
+
+console.log(arrDeep2.flat(2));
+
+const groupedMovements = Object.groupBy(movements, movement =>
+  movement > 0 ? 'Deposit' : 'Withdraw'
+);
+
+console.log(groupedMovements);
+console.log(accounts);
+
+const groupedByActivity = Object.groupBy(accounts, account => {
+  const movementCount = account.movements.length;
+
+  if (movementCount >= 8) return 'Very active';
+  if (movementCount >= 4) return 'Active';
+  if (movementCount >= 1) return 'Moderate';
+  return 'inactive';
+});
+
+console.log(groupedByActivity);
