@@ -955,3 +955,22 @@ const randomDiceRolls = Array.from(
   () => Math.floor(Math.random() * 6) + 1
 );
 console.log(randomDiceRolls);
+
+const bankDepositTotal = accounts
+  .flatMap(acc => acc.movements)
+  .filter(mov => mov > 0)
+  .reduce((sum, cur) => sum + cur, 0);
+
+console.log(bankDepositTotal);
+
+const numDepositThousand = accounts
+  .flatMap(acc => acc.movements)
+  .reduce((acc, cur) => (cur >= 1000 ? ++acc : acc), 0);
+
+console.log(numDepositThousand);
+
+// This plus plus(++) increase the value but didn't show result.
+// To fix this: Use prefix operator(++a)
+let a = 10;
+console.log(a++);
+console.log(a);
