@@ -949,3 +949,9 @@ console.log(groupedByActivity);
 
 const groupAccounts = Object.groupBy(accounts, account => account.type);
 console.log(groupAccounts);
+
+const randomDiceRolls = Array.from(
+  { length: 100 },
+  () => Math.floor(Math.random() * 6) + 1
+);
+console.log(randomDiceRolls);
