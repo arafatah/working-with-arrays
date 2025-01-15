@@ -975,7 +975,7 @@ let a = 10;
 console.log(a++);
 console.log(a);
 
-// This can be destructure also immediately. 
+// This can be destructure also immediately.
 const sums = accounts
   .flatMap(acc => acc.movements)
   .reduce(
@@ -988,8 +988,7 @@ const sums = accounts
 
 console.log(sums);
 
-
-const convertTitleCase = function(title) {
+const convertTitleCase = function (title) {
   const capitalize = str => str[0].toUpperCase() + str.slice(1);
   const exceptions = ['a', 'an', 'and', 'the', 'but', 'or', 'on', 'in', 'with'];
 
@@ -1002,4 +1001,7 @@ const convertTitleCase = function(title) {
   return capitalize(titleCase);
 };
 
-console.log(convertTitleCase('hello my name is arafat'))
+console.log(convertTitleCase('hello my name is arafat'));
+
+/////////////////////////////
+
